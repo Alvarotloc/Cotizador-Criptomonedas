@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { monedas } from '../data/monedas';
 import useSelectMonedas from '../hooks/useSelectMonedas';
 import {CryptoTypes } from '../types/cryptoTypes';
+import Error from './Error';
 
 export interface Opcion {
     id : string,
@@ -31,8 +32,10 @@ const InputSubmit = styled.input`
 
 const Formulario = ():JSX.Element => {
 
-    const [criptos, setCriptos] = useState<Opcion[]>([])
+    const [criptos, setCriptos] = useState<Opcion[]>([]);
+    const [error, setError] = useState<boolean>(false);
     const [moneda,SelectMonedas] = useSelectMonedas('Elige Tu Moneda', monedas);
+    const [cripto,SelectCriptomoneda] = useSelectMonedas('Elige Tu Criptomoneda', criptos);
 
     useEffect(() => {
         const consultarApi =async () => {
@@ -56,11 +59,26 @@ const Formulario = ():JSX.Element => {
         }
         consultarApi();
     },[])
+
+    const handleSubmit = (e:FormEvent) => {
+        e.preventDefault();
+
+        if([moneda,cripto].includes('')){
+            return setError(true);
+        }
+        setError(false);
+    }
+
+
   return (
-    <form>
+      <>
+            {error && <Error>Todos los campos son obligatorios</Error>}
+    <form onSubmit={handleSubmit}>
         <SelectMonedas />
+        <SelectCriptomoneda />
         <InputSubmit type="submit" value="Cotizar" />
     </form>
+      </>
   )
 }
 
