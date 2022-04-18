@@ -8,7 +8,6 @@ html{
 }
 body{
     background-color: #0D2235;
-    font-family: 'Lato', sans-serif;
     font-size: 16px;
     /* Esto lo que hace es que 1rem equivalga a 10px */
 }
