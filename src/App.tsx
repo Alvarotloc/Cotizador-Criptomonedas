@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import ImagenCripto from "./img/imagen-criptos.png";
+import Formulario from './components/Formulario';
 
 const Contenedor = styled.div`
   max-width: 90rem;
@@ -44,6 +45,7 @@ const App = (): JSX.Element => {
       <Imagen src={ImagenCripto} alt="Imagen de criptomonedas" />
       <div>
         <Heading>Cotiza Criptomonedas Al Instante</Heading>
+        <Formulario />
       </div>
     </Contenedor>
   );
