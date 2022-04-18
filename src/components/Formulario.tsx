@@ -29,8 +29,12 @@ const InputSubmit = styled.input`
     }
 `
 
+interface FormParams {
+    setMonedas : Function
+}
 
-const Formulario = ():JSX.Element => {
+
+const Formulario = ({setMonedas}:FormParams):JSX.Element => {
 
     const [criptos, setCriptos] = useState<Opcion[]>([]);
     const [error, setError] = useState<boolean>(false);
@@ -67,6 +71,10 @@ const Formulario = ():JSX.Element => {
             return setError(true);
         }
         setError(false);
+        setMonedas({
+            moneda,
+            cripto
+        })
     }
 
 
